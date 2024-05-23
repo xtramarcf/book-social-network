@@ -25,8 +25,7 @@ import {ApiModule} from "./services/api.module";
         FormsModule,
         HttpClientModule,
         CodeInputModule,
-        // Edit URL to VPS IP
-        ApiModule.forRoot({rootUrl: 'http://192.168.0.227.8088/api/v1'})
+        ApiModule.forRoot({rootUrl: 'http://localhost:8088/api/v1'})
     ],
   providers: [
     HttpClient,

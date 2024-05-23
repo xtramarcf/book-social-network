@@ -13,7 +13,7 @@ on:
 jobs:
   build-image:
     name: Build FE Docker image
-    runs-on: ubuntu
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,17 +45,7 @@ jobs:
     runs-on: self-hosted
     needs: [ build-image ]
     steps:
-      - name: Create deployment folder
-        # change the system and add the secrets
-        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_VPS_IP }} "mkdir -p cicd"
-
-      - name: Copy docker-compose file
-        run: scp docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_VPS_IP }}:cicd/docker-compose.yml
-
-      - name: Set ENV variable and deploy
+      - name: deploy
         run: |
-          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_VPS_IP }} <<EOF
-          cd ci-cd
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
-          EOF
