@@ -1,10 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
+// @ts-ignore
 import { Injectable } from '@angular/core';
 
 /**
  * Global configuration
  */
+// @ts-ignore
 @Injectable({
   providedIn: 'root',
 })

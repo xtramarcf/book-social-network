@@ -16,6 +16,10 @@ spring:
   mail:
     properties:
       mail:
+        host: ${EMAIL_HOSTNAME}
+        port: 25
+        username: ${EMAIL_USER_NAME}
+        password: ${EMAIL_PASSWORD}
         smtp:
           ssl:
             trust: "*"
@@ -34,6 +38,9 @@ application:
   mailing:
     frontend:
       activation-url: http://localhost:4200/activate-account
+  cors:
+    # Add server address with port 8080 for backend and 8088 for frontend
+    origins: http://localhost:4200,http://localhost:8080
   file:
     uploads:
       photos-output-path: ./uploads
