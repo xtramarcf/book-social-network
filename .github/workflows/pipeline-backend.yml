@@ -3,7 +3,7 @@ name: BSN Backend API Pipeline
 on:
   push:
     branches:
-      - ci/pipeline
+      - pipeline
     paths:
       - book-network/**
       - docker/backend/**
