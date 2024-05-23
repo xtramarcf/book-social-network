@@ -40,7 +40,7 @@ application:
       activation-url: http://localhost:4200/activate-account
   cors:
     # Add server address with port 8080 for backend and 8088 for frontend
-    origins: http://localhost:4200,http://localhost:8080
+    origins: http://localhost:4200,http://localhost:8080, ,http://localhost:8088
   file:
     uploads:
       photos-output-path: ./uploads
