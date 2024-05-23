@@ -1,6 +1,6 @@
 name: BSN Frontend API Pipeline
 
-# For Testing
+# For Test
 on:
   push:
     branches:
