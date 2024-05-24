@@ -52,6 +52,7 @@ jobs:
               -p 5432:5432 \
               --restart unless-stopped \
               postgres
+            echo "test"
           fi
 
   unit-tests:
