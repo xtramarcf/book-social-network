@@ -41,19 +41,18 @@ jobs:
       - name: Run PostgreSQL Docker container
         run: |
           sudo chmod 666 /var/run/docker.sock
-          if ! docker ps -a -q -f name=postgres-sql-bsn-test ; then
-            docker run -d \
-              --name postgres-sql-bsn-test \
-              -e POSTGRES_USER=username \
-              -e POSTGRES_PASSWORD=password \
-              -e PGDATA=/var/lib/postgresql/data \
-              -e POSTGRES_DB=book_social_network \
-              -v postgres:/var/lib/postgresql/data \
-              -p 5432:5432 \
-              --restart unless-stopped \
-              postgres
-            echo "test"
-          fi
+          docker stop postgres-sql-bsn- || true
+          docker rm postgres-sql-bsn-test || true
+          docker run -d \
+            --name postgres-sql-bsn-test \
+            -e POSTGRES_USER=username \
+            -e POSTGRES_PASSWORD=password \
+            -e PGDATA=/var/lib/postgresql/data \
+            -e POSTGRES_DB=book_social_network \
+            -v postgres:/var/lib/postgresql/data \
+            -p 5432:5432 \
+            --restart unless-stopped \
+            postgres
 
   unit-tests:
     runs-on: self-hosted
@@ -160,8 +159,8 @@ jobs:
     steps:
       - name: Stop and remove PostgreSQL Docker container
         run: |
-          docker stop postgres-sql-bsn-test
-          docker rm postgres-sql-bsn-test
+          docker stop postgres-sql-bsn- || true
+          docker rm postgres-sql-bsn-test || true
 
   deploy:
     name: Deploy Backend
