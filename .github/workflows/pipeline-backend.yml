@@ -165,7 +165,7 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
-    needs: [ stop-test-postgres ]
+    needs: [ stop-test-db ]
     steps:
 
       - name: Create deployment folder
