@@ -1,6 +1,6 @@
 name: BSN Backend API Pipeline
 
-#Trigg
+#Trigger
 on:
   push:
     branches:
