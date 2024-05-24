@@ -41,7 +41,7 @@ jobs:
         run: |
           sudo docker stop postgres-sql-bsn
           sudo docker rm postgres-sql-bsn
-          sudo docker run \
+          sudo docker run -d \
             --name postgres-sql-bsn \
             -e POSTGRES_USER=username \
             -e POSTGRES_PASSWORD=password \
