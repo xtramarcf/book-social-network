@@ -39,6 +39,8 @@ jobs:
     steps:
       - name: Run PostgreSQL Docker container
         run: |
+          sudo docker stop postgres-sql-bsn
+          sudo docker rm postgres-sql-bsn
           sudo docker run \
             --name postgres-sql-bsn \
             -e POSTGRES_USER=username \
