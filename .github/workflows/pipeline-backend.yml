@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Run PostgreSQL Docker container
         run: |
-          docker run \
+          sudo docker run \
             --name postgres-sql-bsn \
             -e POSTGRES_USER=username \
             -e POSTGRES_PASSWORD=password \
@@ -144,8 +144,8 @@ jobs:
     steps:
       - name: Stop and remove PostgreSQL Docker container
         run: |
-          docker stop postgres-sql-bsn
-          docker rm postgres-sql-bsn
+          sudo docker stop postgres-sql-bsn
+          sudo docker rm postgres-sql-bsn
 
   deploy:
     name: Deploy Backend
@@ -157,5 +157,5 @@ jobs:
           export EMAIL_HOSTNAME=${{ secrets.EMAIL_HOSTNAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
-          docker-compose -f docker-compose.yml pull -q
-          docker-compose -f docker-compose.yml up -d
+          sudo docker-compose -f docker-compose.yml pull -q
+          sudo docker-compose -f docker-compose.yml up -d
