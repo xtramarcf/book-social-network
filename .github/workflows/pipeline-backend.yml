@@ -74,6 +74,7 @@ jobs:
 
       - name: Running unit Tests
         run: |
+          echo "my existing secret ${{ secrets.EMAIL_HOSTNAME }} "
           cd book-network
           ./mvnw clean test
 
