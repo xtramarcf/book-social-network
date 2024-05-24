@@ -41,7 +41,7 @@ jobs:
       - name: Run PostgreSQL Docker container
         run: |
           sudo chmod 666 /var/run/docker.sock
-          docker stop postgres-sql-bsn- || true
+          docker stop postgres-sql-bsn-test || true
           docker rm postgres-sql-bsn-test || true
           docker run -d \
             --name postgres-sql-bsn-test \
