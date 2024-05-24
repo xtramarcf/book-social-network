@@ -80,7 +80,11 @@ jobs:
   build:
     runs-on: self-hosted
     name: Build backend
-    needs: [ compile, unit-tests ]
+    needs: [ unit-tests ]
+    env:
+      EMAIL_HOST_NAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -102,6 +106,10 @@ jobs:
     name: Build Docker Image
     runs-on: self-hosted
     needs: [ build ]
+    env:
+      EMAIL_HOST_NAME: ${{ secrets.EMAIL_HOST_NAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
