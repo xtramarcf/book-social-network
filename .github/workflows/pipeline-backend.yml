@@ -56,6 +56,10 @@ jobs:
     runs-on: self-hosted
     name: Unit tests
     needs: [ start-test-progress ]
+    env:
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOSTNAME }}
+      EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
