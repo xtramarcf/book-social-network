@@ -57,7 +57,7 @@ jobs:
     name: Unit tests
     needs: [ start-test-progress ]
     env:
-      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOSTNAME }}
+      EMAIL_HOSTNAME: ${{ secrets.EMAIL_HOST_NAME }}
       EMAIL_USER_NAME: ${{ secrets.EMAIL_USER_NAME }}
       EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     steps:
@@ -74,7 +74,9 @@ jobs:
 
       - name: Running unit Tests
         run: |
-          echo "my existing secret ${{ secrets.EMAIL_HOSTNAME }} "
+          echo "my existing secret ${{ secrets.EMAIL_HOST_NAME }} "
+          echo "my existing secret ${{ secrets.EMAIL_USER_NAME }} "
+          echo "my existing secret ${{ secrets.EMAIL_PASSWORD }} "
           cd book-network
           ./mvnw clean test
 
@@ -160,7 +162,7 @@ jobs:
     steps:
       - name: Set ENV variable and deploy
         run: |
-          export EMAIL_HOSTNAME=${{ secrets.EMAIL_HOSTNAME }}
+          export EMAIL_HOSTNAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
           sudo docker-compose -f docker-compose.yml pull -q
