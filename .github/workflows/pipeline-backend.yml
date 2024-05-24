@@ -47,7 +47,6 @@ jobs:
             -e POSTGRES_DB=book_social_network \
             -v postgres:/var/lib/postgresql/data \
             -p 5432:5432 \
-            --network spring-demo \
             --restart unless-stopped \
             postgres
 
