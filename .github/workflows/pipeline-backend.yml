@@ -54,6 +54,7 @@ jobs:
   unit-tests:
     runs-on: self-hosted
     name: Unit tests
+    needs: [ start-test-progress ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -74,8 +75,7 @@ jobs:
   build:
     runs-on: self-hosted
     name: Build backend
-    #    needs: [ compile, unit-tests ]
-    needs: [ compile ]
+    needs: [ compile, unit-tests ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -140,7 +140,7 @@ jobs:
 
   stop-test-postgres:
     runs-on: self-hosted
-    needs: [build-image]
+    needs: [ build-image ]
     steps:
       - name: Stop and remove PostgreSQL Docker container
         run: |
