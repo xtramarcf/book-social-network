@@ -52,6 +52,7 @@ jobs:
               -p 5432:5432 \
               --restart unless-stopped \
               postgres
+          fi
 
   unit-tests:
     runs-on: self-hosted
