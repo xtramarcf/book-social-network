@@ -14,19 +14,19 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   mail:
-    properties:
-      mail:
-        host: ${EMAIL_HOSTNAME}
-        port: 25
-        username: ${EMAIL_USER_NAME}
-        password: ${EMAIL_PASSWORD}
-        smtp:
-          ssl:
-            trust: "*"
-          auth: true
-          starttls:
-            enable: true
-          timeout: 10000
+      host: ${EMAIL_HOSTNAME}
+      port: 25
+      username: ${EMAIL_USER_NAME}
+      password: ${EMAIL_PASSWORD}
+      properties:
+        mail:
+          smtp:
+            ssl:
+              trust: "*"
+            auth: true
+            starttls:
+              enable: true
+            timeout: 10000
 ---
 application:
   security:

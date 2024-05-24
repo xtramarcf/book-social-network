@@ -155,7 +155,7 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
-    needs: [ build-image ]
+    needs: [ stop-test-postgres ]
     steps:
       - name: Set ENV variable and deploy
         run: |
