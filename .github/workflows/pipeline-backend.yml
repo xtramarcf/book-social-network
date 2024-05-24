@@ -153,26 +153,31 @@ jobs:
             PROFILE=dev
             APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
 
-  stop-test-postgres:
+  stop-test-db:
     runs-on: self-hosted
     needs: [ build-image ]
     steps:
       - name: Stop and remove PostgreSQL Docker container
         run: |
-          docker stop postgres-sql-bsn- || true
-          docker rm postgres-sql-bsn-test || true
+          docker stop postgres-sql-bsn-test
+          docker rm postgres-sql-bsn-test
 
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
     needs: [ stop-test-postgres ]
     steps:
+
+      - name: Create deployment folder
+        run: "mkdir -p ci-cd"
+
+      - name: Copy docker-compose file
+        run: scp -oStrictHostKeyChecking=no docker-compose.yml ci-cd/docker-compose.yml
+
       - name: Set ENV variable and deploy
         run: |
-          <<EOF
-          export EMAIL_HOSTNAME=${{ secrets.EMAIL_HOST_NAME }}
+          export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
-          EOF
