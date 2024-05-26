@@ -171,9 +171,15 @@ jobs:
     needs: [ stop-test-db ]
     steps:
 
+      - name: Create deployment folder
+        run: "mkdir -p ci-cd"
+
+      - name: Copy docker-compose file
+        run: scp -oStrictHostKeyChecking=no docker-compose.yml ci-cd/docker-compose.yml
+
       - name: Set ENV variable and deploy
         run: |
-          cd ../book-social-network/book-social-network
+          cd ci-cd
           export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
