@@ -1,6 +1,6 @@
 name: BSN Frontend API Pipeline
 
-# For Te
+# Trigger
 on:
   push:
     branches:
@@ -23,7 +23,7 @@ jobs:
       - name: Extract project version
         id: extract_version
         # apt-get install jq on hosted server
-        run: | 
+        run: |
           cd book-network-ui
           echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
 
@@ -47,8 +47,15 @@ jobs:
     runs-on: self-hosted
     needs: [ build-image ]
     steps:
+
+      - name: Create deployment folder
+        run: "mkdir -p ci-cd"
+
+      - name: Copy docker-compose file
+        run: scp -oStrictHostKeyChecking=no docker-compose.yml ci-cd/docker-compose.yml
+
       - name: deploy
         run: |
-          cd book-social-network/book-social-network
+          cd ci-cd
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
