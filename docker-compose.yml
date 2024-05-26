@@ -31,7 +31,7 @@ services:
       - postgres
   bsn-ui:
     container_name: bsn-ui
-    image: bsn/bsn-ui:1.0.0
+    image: xtramarcf/bsn-ui:1.0.0
     ports:
       - 8080:80
     networks:
