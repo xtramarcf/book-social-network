@@ -48,5 +48,6 @@ jobs:
     steps:
       - name: deploy
         run: |
+          cd book-social-network/book-social-network
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
